@@ -1,0 +1,31 @@
+model_configs:
+  # model basic configs
+  model_select: Transformer
+  src_max_time_step: 250
+  tgt_max_time_step: 250
+  cuda: true
+  eval_mode: bleu
+  eval_bs: 50
+  dev_item: BLEU
+  embed_size: &nes 256
+  hidden_size: *nes
+  innder_size: &nis 512
+  drop: 0.1
+  # encoder configs
+  enc_ed: &ned 0.1
+  enc_rd: &nrd 0.1
+  bidirectional: True
+  enc_head: 2
+  enc_num_layers: 3
+  enc_inner_hidden: *nis
+  # decoder configs
+  dec_num_layers: 3
+  dec_head: 2
+  dec_inner_hidden: *nis
+  dec_ed: *ned
+  dec_rd: *nrd
+  # bridger configs
+  share_embed_weight: false
+  share_proj_weight: false
+  warm_up: -1
+  enc_type: rnn

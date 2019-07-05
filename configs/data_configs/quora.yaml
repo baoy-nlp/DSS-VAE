@@ -1,0 +1,15 @@
+rm_repeat: true
+cut_off: 1
+max_src_vocab: 30000
+max_tgt_vocab: 300
+max_src_length: 30
+max_tgt_length: -1
+origin_tgts: /home/user_data/baoy/projects/seq2seq_parser/data/quora-mh/unsupervised
+data_tgts: /home/user_data/baoy/projects/seq2seq_parser/data/quora-mh/unsupervised/quora-l30-c500k-v30k
+origin_file: nltk.post.parsed
+label_file: label.txt
+pair_file: pair.parsed
+unpair_file: unpair.parsed
+train_size: -1
+valid_size: 3000
+test_size: 30000

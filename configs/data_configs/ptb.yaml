@@ -1,0 +1,7 @@
+xwwrm_repeat: true
+cut_off: 1
+max_src_vocab: 30000
+max_tgt_vocab: 300
+max_src_length: -1
+max_tgt_length: -1
+origin_tgts: /home/user_data/baoy/projects/seq2seq_parser/data/s2b

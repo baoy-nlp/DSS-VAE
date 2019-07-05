@@ -1,0 +1,21 @@
+base_configs:
+  # file configs:
+  train_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/quora-for-syntax-vae/train.bin
+  dev_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/quora-for-syntax-vae/dev.bin
+  test_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/quora-for-syntax-vae/test.bin
+  vocab: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/quora-for-syntax-vae/vocab.bin
+  eval_lists: ~
+  logdir: /mnt/cephfs_wj/bytetrans/baoyu.nlp/experiments/logs
+  model_dir: /mnt/cephfs_wj/bytetrans/baoyu.nlp/experiments/models
+  exp_name: ~
+  task_type: SyntaxVAE
+  # train configs
+  start_iter: 0
+  batch_size: 50
+  log_every: 50
+  dev_every: 1000
+  lr: 0.0005
+  lr_decay: 0.8
+  patience: 8
+  clip_grad: 5.0
+  reset_optimizer: false

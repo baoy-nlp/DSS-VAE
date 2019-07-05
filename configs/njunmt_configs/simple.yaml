@@ -1,0 +1,77 @@
+data_configs:
+  lang_pair: "en-de"
+  train_data:
+    - "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/train/train.tags.en-de.bpe.en"
+    - "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/train/train.tags.en-de.bpe.de"
+  valid_data:
+    - "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/dev/valid.en-de.bpe.en"
+    - "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/dev/valid.en-de.bpe.de"
+  bleu_valid_reference: "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/dev/valid.tc.de"
+  vocabularies:
+    - type: "bpe"
+      dict_path: "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/vocab/train.tags.en-de.bpe.en.json"
+      max_n_words: 40000
+    - type: "bpe"
+      dict_path: "/mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/en-de/vocab/train.tags.en-de.bpe.de.json"
+      max_n_words: 40000
+  max_len:
+    - -1
+    - -1
+  num_refs: 1
+  eval_at_char_level: false
+
+model_configs:
+  model: SimpleTransformer
+  n_layers: 5
+  n_head: 2
+  d_word_vec: 278
+  d_model: 278
+  d_inner_hid: 507
+  dropout: 0.1
+  share_embed: false
+  proj_share_weight: false
+  label_smoothing: 0.0
+  pad_ratio: 1.5
+  dec_len_select: "pad"
+  dec_input_select: "hidden"
+  enc_dec_pair_att: true
+  dec_pos_select: "none"
+  dec_mask_select: "diag"
+  layer_pos_func: "pos_att"
+  layer_use_pos: false
+  layer_bow_loss: false
+  layer_bow_weight: 0.1
+  use_src_mask: false
+
+optimizer_configs:
+  optimizer: "adam"
+  learning_rate: 0.2
+  grad_clip: 5.0
+  optimizer_params: ~
+  schedule_method: gu
+  scheduler_configs:
+    d_model: 278
+    warmup_steps: 746
+
+training_configs:
+  seed: 1234
+  max_epochs: 500000
+  shuffle: true
+  use_bucket: true
+  batch_size: 2000
+  batching_key: "tokens"
+  update_cycle: 2
+  valid_batch_size: 20
+  disp_freq: 500
+  save_freq: 500
+  num_kept_checkpoints: 1
+  loss_valid_freq: 500
+  bleu_valid_freq: 500
+  bleu_valid_batch_size: 20
+  bleu_valid_warmup: 1000
+  bleu_valid_configs:
+    max_steps: 150
+    beam_size: 1
+    alpha: 0.6
+    postprocess: True
+  early_stop_patience: 500

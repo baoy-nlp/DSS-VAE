@@ -1,0 +1,62 @@
+model_configs:
+  model_select: SyntaxVAE2
+  task_type: SyntaxVAE2
+  src_max_time_step: &smts 35
+  dec_ratio: 3.2
+  tgt_max_time_step: &tmts 100
+  decode_max_time_step: *smts
+  cuda: true
+  eval_mode: bleu
+  eval_bs: 50
+  dev_item: ELBO
+  warm_up: 1000
+  sort_key: src
+  # seq2seq model parameter
+  embed_size: &ves 300
+  hidden_size: &vhs 300
+  num_layers: &vnl 2
+  rnn_drop: &vrd 0.3
+  rnn_type: gru
+  enc_embed_dim: *ves
+  enc_hidden_dim: *vhs
+  enc_num_layers: *vnl
+  bidirectional: true
+  mapper_type: link
+  dec_embed_dim: *ves
+  dec_hidden_dim: *vhs
+  dec_num_layers: *vnl
+  # vae parameter
+  latent_size: 100
+  dis_train: true
+  sample_size: 5
+  share_embed: true
+  use_attention: false
+  enc_ed: 0.0
+  enc_rd: 0.0
+  dec_ed: *vrd
+  dec_rd: *vrd
+  unk_rate: 0.25
+  k: 0.0025
+  x0: 5000
+  epochs: 10
+  anneal_function: logistic
+  unk_schedule: fixed
+  src_wd: false
+  tgt_wd: true
+  peak_anneal: false
+  init_step_kl_weight: ~
+  stop_clip_kl: 0.3
+  reload_model: false
+  kl_factor: 0.5
+  mul_syn: 0.3
+  mul_sem: 0.3
+  syn_to_sem: 0.3
+  sem_to_syn: 0.3
+  infer_weight: 1.0
+  syn_to_sent: 0.1
+  sem_to_sent: 0.1
+  syn_weight: 1.0
+  sem_weight: 1.0
+  eval_adv: false
+  eval_mul: false
+  report: ~

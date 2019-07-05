@@ -1,0 +1,141 @@
+base_configs:
+# file configs:
+  start_iter: 0
+  config_path: {}
+  train_file: {}
+  dev_file: {}
+  test_file: {}
+  vocab: {}
+  unlabeled_file: ~
+  logdir: &log {}
+  save_decode_to: ~
+  model_dir: {}
+# model configs:
+  mode: ~
+# model parameter set
+  cuda: &use_cuda true
+  seed: 5783287
+# train configs:
+  batch_size: 50
+  lr: 0.001
+  lr_decay: 0.7
+  lr_decay_after_epoch: 5
+  log_every: 50
+  patience: 8
+  max_num_trial: 20
+  dev_every: 1000
+  clip_grad: 5.0
+  reset_optimizer: false
+  src_max_time_step: &smts 40
+  tgt_max_time_step: &tmts 120
+  sample_size: &samplesize 5
+  beam_size: *samplesize
+  clip_learning_signal: ~
+  begin_semisup_after_dev_acc: 0.0
+  unsup_loss_weight: 1.0
+  valid_metric: p_acc
+  uniform_init: ~
+  max_epoch: 20000
+  kl_anneal: false
+  alpha: 0.1
+  verbose: false
+  eval_mode: F1
+  exp_name: &exp_n ~
+  model_backup: reproduct
+
+vae_configs:
+  model_select: &vms SyntaxVAE
+  dis_train: true
+  embed_size: &ves 300
+  hidden_size: &vhs 300
+  num_layers: &vnl 2
+  rnn_drop: &vrd 0.3
+  latent_size: 100
+# seq2seq model parameter
+  rnn_type: gru
+  src_max_time_step: *smts
+  enc_embed_dim: *ves
+  enc_hidden_dim: *vhs
+  enc_num_layers: *vnl
+  bidirectional: true
+  mapper_type: link
+  tgt_max_time_step: *tmts
+  dec_embed_dim: *ves
+  dec_hidden_dim: *vhs
+  dec_num_layers: *vnl
+# vae parameter
+  cuda: *use_cuda
+  decode_max_time_step: *smts
+  eval_mode: bleu
+  logdir: *log
+  log_every: 10
+  model_file: *vms
+  max_sequecne_length: 300
+  print_every: 10
+  sample_size: 5
+  share_embed: true
+  tensorboard_logging: true
+  use_attention: false
+  enc_ed: 0.0
+  enc_rd: 0.0
+  dec_ed: *vrd
+  dec_rd: *vrd
+  unk_rate: 0.50
+  k: 0.0025
+  x0: 5000
+  warm_up: 5000
+  epochs: 10
+  anneal_function: logistic
+  unk_schedule: fixed
+  src_wd: false
+  tgt_wd: true
+  peak_anneal: false
+  init_step_kl_weight: ~
+  stop_clip_kl: 0.3
+  reload_model: false
+  kl_factor: 1.0
+#  aux_weight: 0.3
+  mul_syn: 1.0
+  mul_sem: 2.0
+  adv_syn: 0.3
+  adv_sem: 0.3
+  infer_weight: 1.0
+  inf_syn: 0.2
+  inf_sem: 0.2
+  syn_weight: 1.5
+  sem_weight: 1.0
+  eval_adv: false
+  eval_mul: false
+  dev_item: ELBO
+  eval_bs: 10
+  report: ~
+
+ae_configs:
+  embed_size: &aes 300
+  hidden_size: &ahs 300
+  num_layers: &anl 3
+  rnn_drop: &ard 0.1
+# seq2seq model parameter
+  rnn_type: gru
+  src_max_time_step: *smts
+  enc_embed_dim: *aes
+  enc_hidden_dim: *ahs
+  enc_num_layers: *anl
+  bidirectional: true
+  use_attention: false
+  mapper_type: link
+  tgt_max_time_step: *tmts
+  dec_embed_dim: *aes
+  dec_hidden_dim: *ahs
+  dec_num_layers: *anl
+  enc_ed: *ard
+  enc_rd: *ard
+  dec_ed: *ard
+  dec_rd: *ard
+  model_select: &ae AutoEncoder
+  model_file: *ae
+  share_embed: true
+  cuda: *use_cuda
+  word_drop: 0.25
+  sample_size: 5
+  eval_mode: bleu

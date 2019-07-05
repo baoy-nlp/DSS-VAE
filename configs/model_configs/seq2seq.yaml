@@ -1,0 +1,42 @@
+model_configs:
+  # basic configs
+  model_select: Seq2seq
+  task_type: Autoencoder
+  src_max_time_step: 100
+  tgt_max_time_step: 100
+  cuda: true
+  eval_mode: bleu
+  eval_bs: 50
+  dev_item: BLEU
+  warm_up: -1
+  # encoder configs
+  embed_size: &nes 300
+  hidden_size: *nes
+  rnn_type: gru
+  enc_embed_dim: *nes
+  enc_hidden_dim: *nes
+  enc_ed: &ned 0.1
+  enc_rd: &nrd 0.1
+  bidirectional: True
+  enc_num_layers: 2
+# decoder configs
+  dec_embed_dim: *nes
+  dec_num_layers: 2
+  dec_hidden_dim: *nes
+  dec_ed: *ned
+  dec_rd: *nrd
+  word_drop: 0.2
+  use_attention: false
+# bridger configs
+  sample_size: 5
+  share_embed: true
+  mapper_type: link
+  enc_type: rnn
+# pre-train model
+  pretrain_exp_dir: ~
+  share_encoder: false
+  share_tgt_embed: false
+  fine_tune: false
+  pos_supervised: false
+  word_supervised: false
+  pos_oracle: false

@@ -1,0 +1,47 @@
+model_configs:
+  # model basic configs
+  model_select: SelfAttNAG
+  src_max_time_step: 100
+  tgt_max_time_step: 100
+  cuda: true
+  eval_mode: bleu
+  eval_bs: 50
+  dev_item: BLEU
+# encoder configs
+  embed_size: &nes 256
+  hidden_size: *nes
+  rnn_type: gru
+  enc_type: rnn
+  enc_embed_dim: *nes
+  enc_hidden_dim: *nes
+  enc_ed: &ned 0.1
+  enc_rd: &nrd 0.1
+  bidirectional: True
+  enc_head: 8
+  enc_num_layers: 2
+  enc_inner_hidden: 512
+# decoder configs
+  dec_embed_dim: *nes
+  dec_num_layers: 4
+  dec_head: 8
+  dec_hidden_dim: *nes
+  dec_inner_hidden: 512
+  dec_rd: *nrd
+  dropm: *ned
+  dropo: *nrd
+  use_arc: false
+  use_dst: false
+  word_drop: 0.0
+# bridger configs
+  map_type: att
+  head_num: 8
+  share_embed: true
+  mapper_type: link
+  warm_up: -1
+  # about position
+  pos_initial: true
+  use_pos_pred: false
+  use_pos_exp: false
+  use_st_gumbel: false
+  # about mask
+  use_dec_mask: true

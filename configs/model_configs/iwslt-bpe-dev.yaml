@@ -1,0 +1,22 @@
+base_configs:
+  # file configs:
+  train_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/bpe_level/train.bin
+  dev_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/bpe_level/dev.bin
+  test_file: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/bpe_level/test.bin
+  vocab: /mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/bpe_level/vocab.bin
+  eval_lists:
+    - /mnt/cephfs_wj/common/lab/baoyu.nlp/data/iwslt/bpe_level/valid.de.token.lower
+  logdir: /data00/home/baoyu.nlp/run_logs
+  model_dir: /data00/home/baoyu.nlp/run_models
+  exp_name: ~
+  task_type: Translation
+  # train configs
+  start_iter: 0
+  batch_size: 30
+  log_every: 50
+  dev_every: 500
+  lr: 0.0005
+  lr_decay: 0.8
+  patience: 10
+  clip_grad: -1.0
+  reset_optimizer: false

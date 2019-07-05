@@ -1,0 +1,38 @@
+base_configs:
+  # file configs:
+  start_iter: 0
+  config_path: /data00/home/baoyu.nlp/toutiao-pytorch/NonAutoGEN-pytorch/configs/model_configs/nag.yaml
+  train_file: ../Paraphrase/Quora-Supervised-Plain/train.bin
+  dev_file: ../Paraphrase/Quora-Supervised-Plain/dev.bin
+  test_file: ../Paraphrase/Quora-Supervised-Plain/test.bin
+  vocab: ../Paraphrase/Quora-Supervised-Plain/vocab.bin
+  logdir: &log /data00/home/baoyu.nlp/run_logs
+  model_dir: /data00/home/baoyu.nlp/run_models
+  # model configs:
+  mode: ~
+  # model parameter set
+  cuda: &use_cuda true
+  seed: 5783287
+  # train configs:
+  batch_size: 50
+  lr: 0.001
+  lr_decay: 0.7
+  lr_decay_after_epoch: 5
+  log_every: 50
+  patience: 8
+  max_num_trial: 20
+  dev_every: 500
+  clip_grad: 5.0
+  reset_optimizer: false
+  src_max_time_step: &smts 55
+  tgt_max_time_step: &tmts 55
+  beam_size: 5
+  clip_learning_signal: ~
+  valid_metric: p_acc
+  uniform_init: ~
+  max_epoch: 20000
+  kl_anneal: false
+  alpha: 0.1
+  verbose: false
+  exp_name: &exp_n ~
+  model_backup: reproduct

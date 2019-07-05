@@ -1,0 +1,13 @@
+data_dirs: /home/user_data/baoy/projects/seq2seq_parser/data/snli
+train_file: train.tree
+dev_file: dev.tree
+test_file: test.tree
+rm_repeat: true
+cut_off: 1
+max_src_vocab: 40000
+max_tgt_vocab: 300
+process_dirs: /home/user_data/baoy/projects/seq2seq_parser/data/snli-process
+process_train: train.s2b
+process_dev: dev.s2b
+process_test: test.s2b
+sample_dirs: /home/user_data/baoy/projects/seq2seq_parser/data/snli-sample
